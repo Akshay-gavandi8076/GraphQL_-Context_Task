@@ -1,25 +1,27 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
+import BrandList from './Components/BrandList';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// Pass your GraphQL endpoint to uri
+const client = new ApolloClient({
+	uri: 'https://lively-darkness.eu-central-1.aws.cloud.dgraph.io/graphql',
+});
+class App extends Component {
+	render() {
+		return (
+			<div className='App'>
+				<div className='container'>
+					<ApolloProvider client={client}>
+						<div className='grid-2'>
+							<BrandList />
+						</div>
+					</ApolloProvider>
+				</div>
+			</div>
+		);
+	}
 }
 
 export default App;
